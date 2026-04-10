@@ -1,0 +1,3350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJgrow It</title>
+    <!-- Favicon -->
+    <link rel="icon" href="favicon/web-app-manifest-192x192.png" type="image/png">
+    <link rel="shortcut icon" href="favicon/favicon-96x96.png" type="image/png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2A6AF3;
+            --secondary: #1F3B8B;
+            --accent: #00D4FF;
+            --dark: #071A52;
+            --light: #F0F5FF;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --gradient: linear-gradient(135deg, #071A52 0%, #1F3B8B 50%, #2A6AF3 100%);
+            --gradient-hover: linear-gradient(135deg, #2A6AF3 0%, #1F3B8B 50%, #071A52 100%);
+            
+            /* Dark mode variables */
+            --bg-color: #F0F5FF;
+            --text-color: #071A52;
+            --card-bg: white;
+            --header-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark-mode {
+            --bg-color: #0A1128;
+            --text-color: #F0F5FF;
+            --card-bg: #071A52;
+            --header-bg: rgba(7, 26, 82, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background: var(--gradient);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+        }
+
+        .announcement-bar .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .announcement-bar span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 40px;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            top: 0;
+            background: var(--header-bg);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .logo-text {
+            font-family: "Hello Paris Script", cursive;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all 0.3s ease;
+
+        }
+
+        .logo-container:hover .logo-text {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: var(--card-bg);
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            z-index: 1001;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--gradient);
+            color: white;
+            padding-left: 20px;
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 140px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" fill="%23ffffff" fill-opacity="0.1"></path></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease 0.4s both;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: var(--gradient-hover);
+            color: white;
+        }
+
+        .btn-gradient {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Services Page */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .service-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Dropshipping Page */
+        .dropshipping-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .dropshipping-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .dropshipping-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .dropshipping-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .dropshipping-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .dropshipping-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .dropshipping-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Templates Page */
+        .templates-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .template-filter-btn {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .template-filter-btn:hover, .template-filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .template-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .template-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .template-card:hover .template-image img {
+            transform: scale(1.1);
+        }
+
+        .template-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .template-content {
+            padding: 1.5rem;
+        }
+
+        .template-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .template-content p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .template-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Portfolio Page */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .portfolio-content p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--card-bg);
+            padding: 80px 0;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonials-slider {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            background: var(--bg-color);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .client-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .client-details h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .client-details p {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Contact Page */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .contact-details p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 106, 243, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Booking Modal - Simplified */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .booking-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-header p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .service-details-modal {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+        }
+
+        .service-details-modal h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .service-details-modal p {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Options in Modal */
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-option {
+            background: var(--bg-color);
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+
+        .contact-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(42, 106, 243, 0.15);
+        }
+
+        .contact-option i {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .contact-option h4 {
+            margin-bottom: 0.3rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .contact-option p {
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            line-height: 1.3;
+        }
+
+        .contact-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: var(--bg-color);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .contact-note p {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .contact-note .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Buy Now Modal - Updated for Mobile */
+        .buy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .buy-modal.active {
+            display: flex;
+        }
+
+        .buy-modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .close-buy-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .close-buy-modal:hover {
+            color: var(--primary);
+        }
+
+        .buy-modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .buy-modal-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .buy-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .buy-option {
+            background: var(--bg-color);
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .buy-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(42, 106, 243, 0.15);
+        }
+
+        .buy-option i {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .buy-option h4 {
+            margin-bottom: 0.3rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .buy-option p {
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            line-height: 1.3;
+        }
+
+        /* Footer - Redesigned */
+        footer {
+            background: linear-gradient(135deg, #071A52 0%, #1F3B8B 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" fill="%232A6AF3" fill-opacity="0.05"></path></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .footer-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-col {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .footer-logo-circle {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            box-shadow: 0 5px 15px rgba(42, 106, 243, 0.4);
+        }
+
+        .footer-logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: white;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        .footer-col.right h3::after {
+            left: 0;
+            right: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links li:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-links a:hover {
+            color: #2A6AF3;
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            color: #2A6AF3;
+            font-size: 0.9rem;
+            width: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover i {
+            transform: scale(1.2);
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-info li:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-info i {
+            color: #2A6AF3;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+            width: 20px;
+        }
+
+        .social-section {
+            margin-top: 1.5rem;
+        }
+
+        .social-title {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 106, 243, 0.3);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link.facebook:hover {
+            box-shadow: 0 8px 20px rgba(59, 89, 152, 0.3);
+        }
+
+        .social-link.whatsapp:hover {
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .social-link.instagram:hover {
+            box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
+        }
+
+        .social-link.linkedin:hover {
+            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
+        }
+
+        .newsletter-form {
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-form p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #2A6AF3;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(42, 106, 243, 0.2);
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-btn {
+            padding: 14px 25px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(42, 106, 243, 0.4);
+            background: var(--gradient-hover);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #2A6AF3;
+        }
+
+        /* Payment methods removed from footer */
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(42, 106, 243, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 106, 243, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* New Pages - Privacy, Terms, Cookie */
+        .legal-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: var(--gradient);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .legal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-content {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+        }
+
+        .legal-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .legal-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .legal-section ul, .legal-section ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .back-to-home {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 12px 25px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 106, 243, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-content,
+            .dropshipping-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-image,
+            .dropshipping-image {
+                order: -1;
+            }
+            
+            .dropshipping-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            .contact-options,
+            .buy-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .legal-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 140px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                z-index: 1000;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background: transparent;
+                display: block;
+                margin-top: 1rem;
+                margin-left: 1rem;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title p {
+                font-size: 1.1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .service-card,
+            .template-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .services-grid,
+            .templates-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .testimonial-card {
+                padding: 2rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .page {
+                padding-top: 120px;
+            }
+
+            .portfolio-filters,
+            .templates-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn,
+            .template-filter-btn {
+                width: 200px;
+                text-align: center;
+            }
+
+            .modal-content,
+            .buy-modal-content {
+                padding: 1.5rem;
+            }
+            
+            .contact-options,
+            .buy-options {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .contact-option,
+            .buy-option {
+                padding: 1rem 0.5rem;
+                min-height: 100px;
+            }
+            
+            .contact-option i,
+            .buy-option i {
+                font-size: 1.8rem;
+            }
+            
+            .contact-option h4,
+            .buy-option h4 {
+                font-size: 0.9rem;
+            }
+            
+            .contact-option p,
+            .buy-option p {
+                font-size: 0.75rem;
+            }
+            
+            .contact-note {
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .contact-note p {
+                font-size: 0.85rem;
+            }
+            
+            .modal-header h2,
+            .buy-modal-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .newsletter-input-group {
+                flex-direction: column;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .legal-page {
+                padding: 1rem;
+            }
+            
+            .legal-header {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .legal-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .footer-logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .footer-col h3 {
+                font-size: 1.2rem;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .announcement-bar {
+                font-size: 12px;
+                padding: 8px 0;
+            }
+            
+            header {
+                top: 36px;
+            }
+            
+            .modal-content,
+            .buy-modal-content {
+                padding: 1.2rem;
+                max-height: 80vh;
+            }
+            
+            .contact-option,
+            .buy-option {
+                min-height: 90px;
+                padding: 0.8rem 0.3rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .modal-content,
+            .buy-modal-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="marquee">
+            <span>🚀 Special Offer: Get 20% off on all services for limited time! Contact us now. 🚀</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container" onclick="showPage('home-page')">
+                    <img src="logo/logo4.png" alt="MJgrow It Logo" class="logo-img">
+                    <div class="logo-text"></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a onclick="showPage('home-page')">Home</a></li>
+                    <li><a onclick="showPage('about-page')">About</a></li>
+                    <li class="dropdown">
+                        <a>Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a onclick="showPage('services-page')"><i class="fas fa-laptop-code"></i> Digital Services</a>
+                            <a onclick="showPage('dropshipping-page')"><i class="fas fa-shipping-fast"></i> Dropshipping</a>
+                            <a onclick="showPage('templates-page')"><i class="fas fa-shopping-cart"></i> Buy Templates</a>
+                        </div>
+                    </li>
+                    <li><a onclick="showPage('portfolio-page')">Portfolio</a></li>
+                    <li><a onclick="showPage('contact-page')">Contact</a></li>
+                    <li>
+                        <button class="dark-mode-toggle" id="darkModeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Transform Your Digital Presence With MJgrow It</h1>
+                    <p>We create stunning websites and powerful digital marketing strategies that drive real results. With 5+ years of experience, we've helped businesses grow online.</p>
+                    <button class="btn" onclick="showPage('services-page')">Our Services</button>
+                    <button class="btn btn-gradient" onclick="showPage('dropshipping-page')">Start Dropshipping</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive digital solutions for your business</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card" onclick="showPage('services-page')">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Professional website development with modern technologies</p>
+                    </div>
+                    <div class="service-card" onclick="showPage('dropshipping-page')">
+                        <div class="service-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Facebook Dropshipping</h3>
+                        <p>Complete dropshipping setup and management services</p>
+                    </div>
+                    <div class="service-card" onclick="showPage('templates-page')">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Premium Templates</h3>
+                        <p>Shopify & WordPress templates for your online store</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose MJgrow It?</h2>
+                    <p>We deliver exceptional results through our proven approach</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div>Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div>Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div>Client Satisfaction</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div>Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What Our Clients Say</h2>
+                    <p>Don't just take our word for it - hear from our satisfied clients</p>
+                </div>
+                <div class="testimonials-container">
+                    <div class="testimonials-slider">
+                        <div class="testimonials-track" id="testimonialsTrack">
+                            <div class="testimonial-card">
+                                <div class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "MJgrow It transformed our online presence completely. Our website traffic increased by 300% and conversions went up by 150%. Their team is professional, creative, and delivers on time."
+                                </p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Client" class="client-avatar">
+                                    <div class="client-details">
+                                        <h4>Michael Chen</h4>
+                                        <p>CEO, TechSolutions Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "Working with MJgrow It was a game-changer for our e-commerce business. Their digital marketing strategies helped us reach new customers and increase sales by 200% in just 3 months."
+                                </p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Client" class="client-avatar">
+                                    <div class="client-details">
+                                        <h4>Sarah Johnson</h4>
+                                        <p>Founder, FashionHub</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "The web development team at MJgrow It created a stunning, responsive website that perfectly represents our brand. Their attention to detail and technical expertise is impressive."
+                                </p>
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Client" class="client-avatar">
+                                    <div class="client-details">
+                                        <h4>David Wilson</h4>
+                                        <p>Marketing Director, GlobalCorp</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <div class="testimonial-dot active" onclick="showTestimonial(0)"></div>
+                        <div class="testimonial-dot" onclick="showTestimonial(1)"></div>
+                        <div class="testimonial-dot" onclick="showTestimonial(2)"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About MJgrow It</h2>
+                    <p>Learn more about our journey and what makes us different</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Your Trusted Digital Partner</h3>
+                        <p>Founded in 2026, MJgrow It Agency started as a small team of passionate developers and marketers with a vision to transform the digital landscape. Over the past 7+ years, we've grown into a full-service digital agency serving clients worldwide.</p>
+                        <p>Our team combines technical expertise with creative marketing strategies to build websites that not only look great but also perform exceptionally well in search engines and convert visitors into customers.</p>
+                        <p>We stay at the forefront of technology trends and marketing techniques to ensure our clients always have a competitive edge in the digital landscape.</p>
+                        
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">7+</div>
+                                <div>Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">200+</div>
+                                <div>Projects Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Our Team">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive digital solutions for your business</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>We build responsive, scalable web applications using modern technologies like React, Node.js, and MongoDB.</p>
+                        <div class="service-price">Starting at $399</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('Web Development', 'Starting at $499')">Book Now</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Creating intuitive and visually appealing interfaces that enhance user experience and drive engagement.</p>
+                        <div class="service-price">Starting at $299</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('UI/UX Design', 'Starting at $299')">Book Now</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>E-commerce Solutions</h3>
+                        <p>Custom online stores with secure payment gateways, inventory management, and marketing features.</p>
+                        <div class="service-price">Starting at $150</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('E-commerce Solutions', 'Starting at $799')">Book Now</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Digital Marketing</h3>
+                        <p>Comprehensive marketing strategies including SEO, social media, and content marketing to grow your business.</p>
+                        <div class="service-price">Starting at $199/month</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('Digital Marketing', 'Starting at $399/month')">Book Now</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <h3>Meta Marketing</h3>
+                        <p>Strategic Facebook and Instagram advertising campaigns to reach your target audience effectively.</p>
+                        <div class="service-price">Starting at $99/month</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('Meta Marketing', 'Starting at $299/month')">Book Now</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics & Reporting</h3>
+                        <p>Detailed performance tracking and insights to measure ROI and optimize your digital presence.</p>
+                        <div class="service-price">Starting at $199/month</div>
+                        <button class="btn btn-gradient btn-small" onclick="openBookingModal('Analytics & Reporting', 'Starting at $199/month')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dropshipping Page -->
+    <div id="dropshipping-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Facebook Dropshipping Services</h2>
+                    <p>Start your online business with our complete dropshipping solutions</p>
+                </div>
+                <div class="dropshipping-content">
+                    <div class="dropshipping-text">
+                        <h3>Start Your Dropshipping Business Today</h3>
+                        <p>We provide complete Facebook dropshipping solutions including store setup, product sourcing, marketing strategies, and order fulfillment. Our team handles everything from A to Z so you can focus on growing your business.</p>
+                        <p>With our proven strategies, you can start making profits within weeks. We've helped hundreds of entrepreneurs build successful dropshipping businesses on Facebook Marketplace.</p>
+                        
+                        <div class="dropshipping-benefits">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <div class="benefit-text">
+                                    <h4>Store Setup</h4>
+                                    <p>Complete Facebook shop configuration</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <div class="benefit-text">
+                                    <h4>Product Sourcing</h4>
+                                    <p>Find winning products with high profit margins</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-ad"></i>
+                                </div>
+                                <div class="benefit-text">
+                                    <h4>Facebook Ads</h4>
+                                    <p>Targeted ad campaigns for maximum ROI</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="benefit-text">
+                                    <h4>Full Support</h4>
+                                    <p>24/7 customer support and guidance</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-gradient" onclick="openBuyModal('Facebook Dropshipping Service', '$299', 'dropshipping')" style="margin-top: 2rem;">
+                            Get Started Now
+                        </button>
+                    </div>
+                    <div class="dropshipping-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Dropshipping Business">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Templates Page -->
+    <div id="templates-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Premium Templates Store</h2>
+                    <p>Choose from our collection of professional templates for your online business</p>
+                </div>
+                
+                <div class="templates-filter">
+                    <button class="template-filter-btn active" onclick="filterTemplates('all')">All Templates</button>
+                    <button class="template-filter-btn" onclick="filterTemplates('shopify')">Shopify</button>
+                    <button class="template-filter-btn" onclick="filterTemplates('wordpress')">WordPress</button>
+                    <button class="template-filter-btn" onclick="filterTemplates('ecommerce')">E-commerce</button>
+                </div>
+                
+                <div class="templates-grid">
+                    <div class="template-card" data-category="shopify ecommerce">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Shopify Template">
+                            <div class="template-badge">Shopify</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>Nova - Modern Shopify Theme</h3>
+                            <p>Responsive Shopify template with advanced product filtering, quick view, and mobile-optimized design.</p>
+                            <div class="template-price">$19</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('Nova Shopify Theme', '$89', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="wordpress">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="WordPress Template">
+                            <div class="template-badge">WordPress</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>CorporatePro Business Theme</h3>
+                            <p>Professional WordPress theme for corporate websites with drag-and-drop page builder and SEO optimized.</p>
+                            <div class="template-price">$25</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('CorporatePro WordPress Theme', '$79', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="shopify ecommerce">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Shopify Template">
+                            <div class="template-badge">Shopify</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>Electro - Electronics Store</h3>
+                            <p>Specialized Shopify template for electronics stores with product comparison, wishlist, and mega menu.</p>
+                            <div class="template-price">$15</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('Electro Shopify Theme', '$99', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="wordpress ecommerce">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="WordPress Template">
+                            <div class="template-badge">WordPress</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>WooCommerce Fashion Store</h3>
+                            <p>Complete WooCommerce solution for fashion stores with size charts, color swatches, and lookbook feature.</p>
+                            <div class="template-price">$29</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('Fashion WooCommerce Theme', '$129', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="shopify">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Shopify Template">
+                            <div class="template-badge">Shopify</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>Minimal - Clean Shopify Theme</h3>
+                            <p>Minimalistic Shopify template with focus on product presentation and fast loading speed.</p>
+                            <div class="template-price">$19</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('Minimal Shopify Theme', '$69', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="wordpress">
+                        <div class="template-image">
+                            <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="WordPress Template">
+                            <div class="template-badge">WordPress</div>
+                        </div>
+                        <div class="template-content">
+                            <h3>BlogMaster - Content Theme</h3>
+                            <p>Feature-rich WordPress theme for bloggers and content creators with social sharing and newsletter integration.</p>
+                            <div class="template-price">$29</div>
+                            <button class="btn btn-gradient btn-small" onclick="openBuyModal('BlogMaster WordPress Theme', '$59', 'template')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Portfolio Page -->
+    <div id="portfolio-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Portfolio</h2>
+                    <p>Check out some of our recent work</p>
+                </div>
+                
+                <!-- Portfolio Filters -->
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" onclick="filterPortfolio('all')">All Projects</button>
+                    <button class="filter-btn" onclick="filterPortfolio('web')">Web Development</button>
+                    <button class="filter-btn" onclick="filterPortfolio('design')">UI/UX Design</button>
+                    <button class="filter-btn" onclick="filterPortfolio('ecommerce')">E-commerce</button>
+                    <button class="filter-btn" onclick="filterPortfolio('marketing')">Digital Marketing</button>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="web">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="E-commerce Website">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>E-commerce Platform</h3>
+                            <p>Full-stack development with React, Node.js, and MongoDB</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="web">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Business Website">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Corporate Website</h3>
+                            <p>Responsive design with CMS integration</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="marketing">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Social Media Campaign">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Social Media Campaign</h3>
+                            <p>Meta marketing strategy with 300% ROI</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="design">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Web Design">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Creative Web Design</h3>
+                            <p>Modern UI/UX design with responsive layouts</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="web">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mobile App">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Mobile Application</h3>
+                            <p>Cross-platform mobile app development</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="ecommerce">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Digital Marketing">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Online Store</h3>
+                            <p>E-commerce website with payment integration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact-page" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch to discuss your project</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Our Location</h3>
+                                <p>DHAKA,Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Phone Number</h3>
+                                <p>+880 1721-809432</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email Address</h3>
+                                <p>mjgrowit@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Working Hours</h3>
+                                <p>Mon - Fri: 9AM - 4PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gradient" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- New Pages: Privacy Policy, Terms of Service, Cookie Policy -->
+    <!-- Privacy Policy Page -->
+    <div id="privacy-page" class="page">
+        <section class="section">
+            <div class="container legal-page">
+                <div class="legal-header">
+                    <h1>Privacy Policy</h1>
+                    <p>Last Updated: January 2025</p>
+                </div>
+                <div class="legal-content">
+                    <div class="legal-section">
+                        <h2>Introduction</h2>
+                        <p>Welcome to MJgrow It ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices with regard to your personal information, please contact us at mjgrowit@gmail.com.</p>
+                        <p>This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you visit our website or use our services.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Information We Collect</h2>
+                        <p>We collect personal information that you voluntarily provide to us when you:</p>
+                        <ul>
+                            <li>Register on our website</li>
+                            <li>Express an interest in obtaining information about us or our products and services</li>
+                            <li>Participate in activities on the website</li>
+                            <li>Contact us for customer support</li>
+                            <li>Make purchases or request services</li>
+                        </ul>
+                        <p>The personal information we collect may include:</p>
+                        <ul>
+                            <li>Name and contact data (email address, phone number, address)</li>
+                            <li>Payment information (credit card details, billing address)</li>
+                            <li>Business information (company name, job title)</li>
+                            <li>Project requirements and specifications</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>How We Use Your Information</h2>
+                        <p>We use personal information collected via our website for a variety of business purposes described below:</p>
+                        <ul>
+                            <li>To provide and maintain our services</li>
+                            <li>To manage your account and registration</li>
+                            <li>To fulfill and manage your orders</li>
+                            <li>To send administrative information to you</li>
+                            <li>To deliver marketing and promotional communications</li>
+                            <li>To respond to legal requests and prevent harm</li>
+                            <li>For other business purposes such as data analysis, identifying usage trends, and evaluating and improving our services</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Cookies and Tracking Technologies</h2>
+                        <p>We may use cookies and similar tracking technologies to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Policy.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Data Security</h2>
+                        <p>We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Your Privacy Rights</h2>
+                        <p>Depending on your location, you may have certain rights regarding your personal information, including:</p>
+                        <ul>
+                            <li>The right to access and receive a copy of your personal information</li>
+                            <li>The right to rectification of inaccurate information</li>
+                            <li>The right to request deletion of your personal information</li>
+                            <li>The right to restrict processing of your personal information</li>
+                            <li>The right to data portability</li>
+                            <li>The right to withdraw consent</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Contact Us</h2>
+                        <p>If you have questions or comments about this policy, you may contact us at:</p>
+                        <p><strong>Email:</strong> mjgrowit@gmail.com</p>
+                        <p><strong>Phone:</strong> +880 1721-809432</p>
+                        <p><strong>Address:</strong> DHAKA, Bangladesh</p>
+                    </div>
+
+                    <a href="#" onclick="showPage('home-page')" class="back-to-home">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Terms of Service Page -->
+    <div id="terms-page" class="page">
+        <section class="section">
+            <div class="container legal-page">
+                <div class="legal-header">
+                    <h1>Terms of Service</h1>
+                    <p>Last Updated: January 2025</p>
+                </div>
+                <div class="legal-content">
+                    <div class="legal-section">
+                        <h2>Agreement to Terms</h2>
+                        <p>By accessing or using MJgrow It's services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access our services.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Services Description</h2>
+                        <p>MJgrow It provides digital services including but not limited to:</p>
+                        <ul>
+                            <li>Web Development and Design</li>
+                            <li>E-commerce Solutions</li>
+                            <li>Digital Marketing Services</li>
+                            <li>Dropshipping Services</li>
+                            <li>Premium Templates</li>
+                            <li>Consulting Services</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Payments and Refunds</h2>
+                        <h3>Payment Terms</h3>
+                        <p>All services require payment as agreed upon in the service agreement. We accept various payment methods including credit cards, bank transfers, and digital payment platforms.</p>
+                        
+                        <h3>Refund Policy</h3>
+                        <p>Refunds are processed under the following conditions:</p>
+                        <ul>
+                            <li>Service cancellation within 24 hours of purchase: Full refund</li>
+                            <li>Project cancellation after work has begun: Partial refund based on work completed</li>
+                            <li>Digital products (templates): No refunds after download</li>
+                            <li>Subscription services: Prorated refund for unused period</li>
+                        </ul>
+                        <p>All refund requests must be made in writing to mjgrowit@gmail.com within 7 days of purchase.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Intellectual Property</h2>
+                        <p>All content, features, and functionality of our services, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, and software, are the exclusive property of MJgrow It and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+                        
+                        <p>Upon full payment, clients receive a license to use the delivered work for its intended purpose. MJgrow It retains the right to display completed projects in our portfolio unless otherwise agreed in writing.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Client Responsibilities</h2>
+                        <p>Clients agree to:</p>
+                        <ul>
+                            <li>Provide accurate and complete information for project requirements</li>
+                            <li>Make timely payments as agreed</li>
+                            <li>Provide feedback and approvals in a timely manner</li>
+                            <li>Not use our services for illegal purposes</li>
+                            <li>Respect intellectual property rights</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Limitation of Liability</h2>
+                        <p>MJgrow It shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                        <ul>
+                            <li>Your access to or use of or inability to access or use the services</li>
+                            <li>Any conduct or content of any third party on the services</li>
+                            <li>Any content obtained from the services</li>
+                            <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Termination</h2>
+                        <p>We may terminate or suspend your access to our services immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Governing Law</h2>
+                        <p>These Terms shall be governed and construed in accordance with the laws of Bangladesh, without regard to its conflict of law provisions.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Changes to Terms</h2>
+                        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. What constitutes a material change will be determined at our sole discretion.</p>
+                    </div>
+
+                    <a href="#" onclick="showPage('home-page')" class="back-to-home">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Cookie Policy Page -->
+    <div id="cookie-page" class="page">
+        <section class="section">
+            <div class="container legal-page">
+                <div class="legal-header">
+                    <h1>Cookie Policy</h1>
+                    <p>Last Updated: January 2025</p>
+                </div>
+                <div class="legal-content">
+                    <div class="legal-section">
+                        <h2>What Are Cookies</h2>
+                        <p>Cookies are small text files that are placed on your computer or mobile device when you visit our website. They are widely used to make websites work more efficiently and provide information to the website owners.</p>
+                        <p>Cookies do lots of different jobs, like letting you navigate between pages efficiently, remembering your preferences, and generally improving the user experience.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>How We Use Cookies</h2>
+                        <p>We use cookies for the following purposes:</p>
+                        
+                        <h3>Essential Cookies</h3>
+                        <p>These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in, or filling in forms.</p>
+                        
+                        <h3>Performance Cookies</h3>
+                        <p>These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site.</p>
+                        
+                        <h3>Functional Cookies</h3>
+                        <p>These cookies enable the website to provide enhanced functionality and personalization. They may be set by us or by third-party providers whose services we have added to our pages.</p>
+                        
+                        <h3>Targeting Cookies</h3>
+                        <p>These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant advertisements on other sites.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Types of Cookies We Use</h2>
+                        <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background: var(--light);">Cookie Name</th>
+                                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background: var(--light);">Purpose</th>
+                                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background: var(--light);">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">session_id</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">Maintain user session</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">Session</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">preferences</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">Store user preferences</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">30 days</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">analytics</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">Track website usage</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">1 year</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">marketing</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">Targeted advertising</td>
+                                    <td style="border: 1px solid #ddd; padding: 12px;">90 days</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Managing Cookies</h2>
+                        <p>Most web browsers allow you to control cookies through their settings preferences. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience, since it will no longer be personalized to you.</p>
+                        
+                        <h3>Browser Settings</h3>
+                        <p>You can usually find cookie settings in the "options" or "preferences" menu of your browser. To understand these settings, the following links may be helpful:</p>
+                        <ul>
+                            <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Cookie settings in Chrome</a></li>
+                            <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank">Cookie settings in Firefox</a></li>
+                            <li><a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank">Cookie settings in Safari</a></li>
+                            <li><a href="https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">Cookie settings in Edge</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Third-Party Cookies</h2>
+                        <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the service, deliver advertisements on and through the service, and so on.</p>
+                        <p>Some of our pages may contain content from third-party sites such as YouTube, Facebook, or Twitter, which may set their own cookies. We do not control these cookies and you should check the relevant third-party website for more information.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2>Updates to This Policy</h2>
+                        <p>We may update this Cookie Policy from time to time in order to reflect changes to the cookies we use or for other operational, legal, or regulatory reasons.</p>
+                        <p>We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last Updated" date at the top of this Cookie Policy.</p>
+                    </div>
+
+                    <a href="#" onclick="showPage('home-page')" class="back-to-home">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Simplified Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Book Your Service</h2>
+                <p>Contact us directly to book this service</p>
+            </div>
+            
+            <div class="service-details-modal">
+                <h3 id="selectedService">Service Name</h3>
+                <p id="selectedPrice">Price: $0</p>
+            </div>
+            
+            <div class="contact-note">
+                <p><span class="highlight">To book this service, please contact us through any of the following methods:</span></p>
+                <p>We will discuss your requirements, provide a custom quote, and schedule your project.</p>
+            </div>
+            
+            <div class="contact-options">
+                <a href="https://www.facebook.com/mjgrowit/" target="_blank" class="contact-option">
+                    <i class="fab fa-facebook"></i>
+                    <h4>Facebook</h4>
+                    <p>Message us on Facebook</p>
+                </a>
+                
+                <a href="https://wa.me/+8801721809432" target="_blank" class="contact-option">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>Chat with us on WhatsApp</p>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/mjgrow-it-bb02b3398/" target="_blank" class="contact-option">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <p>Connect on LinkedIn</p>
+                </a>
+                
+                <a href="mailto:mjgrowit@gmail.com" class="contact-option">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>Send us an email</p>
+                </a>
+            </div>
+            
+            <div class="contact-note">
+                <p><span class="highlight">Contact Information:</span></p>
+                <p>📞 Phone: +8801721809432 </p>
+                <p>📧 mjgrowit@gmail.com</p>
+                <p>📍 DHAKA, Bangladesh</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Modal -->
+    <div class="buy-modal" id="buyModal">
+        <div class="buy-modal-content">
+            <span class="close-buy-modal" onclick="closeBuyModal()">&times;</span>
+            <div class="buy-modal-header">
+                <h2 id="buyProductTitle">Product Name</h2>
+                <p id="buyProductPrice">Price: $0</p>
+            </div>
+            
+            <div class="contact-note">
+                <p><span class="highlight">To buy this product or service, please contact us through any of the following methods:</span></p>
+                <p>We will provide you with payment details, delivery instructions, and complete support after purchase.</p>
+            </div>
+            
+            <div class="buy-options">
+                <a href="https://www.facebook.com/mjgrowit/" target="_blank" class="buy-option">
+                    <i class="fab fa-facebook"></i>
+                    <h4>Facebook</h4>
+                    <p>Message us on Facebook</p>
+                </a>
+                
+                <a href="https://wa.me/+8801721809432" target="_blank" class="buy-option">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>Chat with us on WhatsApp</p>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/mjgrow-it-bb02b3398/" target="_blank" class="buy-option">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <p>Connect on LinkedIn</p>
+                </a>
+                
+                <a href="mailto:mjgrowit@gmail.com" class="buy-option">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>Send us an email</p>
+                </a>
+            </div>
+            
+            <div class="contact-note">
+                <p><span class="highlight">Contact Information:</span></p>
+                <p>📞 Phone: +8801721809432 </p>
+                <p>📧 mjgrowit@gmail.com</p>
+                <p>📍 DHAKA, Bangladesh</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo" onclick="showPage('home-page')">
+                        <div class="footer-logo-circle">MJ</div>
+                        <div class="footer-logo-text">MJgrow It</div>
+                    </a>
+                    <p>We are a full-service digital agency specializing in web development, dropshipping services, and premium templates. Transforming your digital presence with innovative solutions.</p>
+                    
+                    <div class="social-section">
+                        <div class="social-title">Follow Us:</div>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/mjgrowit/" class="social-link facebook" target="_blank" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://wa.me/+8801721809432" class="social-link whatsapp" target="_blank" title="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="https://instagram.com/pokkieagency" class="social-link instagram" target="_blank" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mjgrow-it-bb02b3398/" class="social-link linkedin" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showPage('home-page')"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a onclick="showPage('about-page')"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a onclick="showPage('services-page')"><i class="fas fa-chevron-right"></i> Digital Services</a></li>
+                        <li><a onclick="showPage('dropshipping-page')"><i class="fas fa-chevron-right"></i> Dropshipping</a></li>
+                        <li><a onclick="showPage('templates-page')"><i class="fas fa-chevron-right"></i> Templates Store</a></li>
+                        <li><a onclick="showPage('portfolio-page')"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showPage('services-page')"><i class="fas fa-laptop-code"></i> Web Development</a></li>
+                        <li><a onclick="showPage('services-page')"><i class="fas fa-paint-brush"></i> UI/UX Design</a></li>
+                        <li><a onclick="showPage('services-page')"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                        <li><a onclick="showPage('services-page')"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                        <li><a onclick="showPage('dropshipping-page')"><i class="fas fa-shipping-fast"></i> Facebook Dropshipping</a></li>
+                        <li><a onclick="showPage('templates-page')"><i class="fas fa-store"></i> Premium Templates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col right">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address:</strong><br>
+                               DHAKA,Bangladesh
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone:</strong><br>
+                                +880 1721-809432
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email:</strong><br>
+                                mjgrowit@gmail.com
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Working Hours:</strong><br>
+                                Sat - Fri: 9AM - 4AM
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="newsletter-form">
+                        <p>Subscribe to our newsletter for updates and offers.</p>
+                        <div class="newsletter-input-group">
+                            <input type="email" class="newsletter-input" placeholder="Your email address" id="footerNewsletterEmail">
+                            <button class="newsletter-btn" onclick="subscribeFooterNewsletter()">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 MJgrow It. All Rights Reserved.</p>
+                </div>
+
+                <div class="footer-bottom-links">
+                    <a onclick="showPage('privacy-page')">Privacy Policy</a>
+                    <a onclick="showPage('terms-page')">Terms of Service</a>
+                    <a onclick="showPage('cookie-page')">Cookie Policy</a>
+                    <a onclick="showPage('contact-page')">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Page Navigation System
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Close mobile menu if open
+            document.querySelector('.nav-links').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update mobile menu state
+            document.querySelector('.mobile-menu i').classList.remove('fa-times');
+            document.querySelector('.mobile-menu i').classList.add('fa-bars');
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Back to top button visibility
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const menuIcon = mobileMenu.querySelector('i');
+        
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Newsletter subscription function
+        function subscribeFooterNewsletter() {
+            const email = document.getElementById('footerNewsletterEmail').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && emailRegex.test(email)) {
+                alert('Thank you for subscribing to our newsletter! We will send updates to: ' + email);
+                document.getElementById('footerNewsletterEmail').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Booking Modal Functions
+        function openBookingModal(service, price) {
+            document.getElementById('selectedService').textContent = service;
+            document.getElementById('selectedPrice').textContent = `Price: ${price}`;
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Buy Now Modal Functions
+        function openBuyModal(product, price, type) {
+            document.getElementById('buyProductTitle').textContent = product;
+            document.getElementById('buyProductPrice').textContent = `Price: ${price}`;
+            document.getElementById('buyModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Update WhatsApp message based on product type
+            const whatsappLink = document.querySelector('.buy-option[href*="whatsapp"]');
+            const message = `Hi, I want to buy your ${product} (${price}). Please provide me with payment details.`;
+            whatsappLink.href = `https://wa.me/+8801721809432?text=${encodeURIComponent(message)}`;
+        }
+
+        function closeBuyModal() {
+            document.getElementById('buyModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookingModal();
+            }
+        });
+
+        document.getElementById('buyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBuyModal();
+            }
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        // Testimonials Slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        const track = document.getElementById('testimonialsTrack');
+
+        function showTestimonial(index) {
+            currentTestimonial = index;
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Auto slide testimonials
+        let testimonialInterval = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Pause auto-slide on hover
+        document.querySelector('.testimonials-slider').addEventListener('mouseenter', () => {
+            clearInterval(testimonialInterval);
+        });
+
+        document.querySelector('.testimonials-slider').addEventListener('mouseleave', () => {
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+        });
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            filterButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category));
+            });
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Template Filtering
+        function filterTemplates(category) {
+            const items = document.querySelectorAll('.template-card');
+            const filterButtons = document.querySelectorAll('.template-filter-btn');
+            
+            // Update active button
+            filterButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category));
+            });
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category').includes(category)) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mobile dropdown functionality
+        document.querySelectorAll('.dropdown > a').forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const content = this.nextElementSibling;
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all service cards, template cards, and portfolio items
+            document.querySelectorAll('.service-card, .template-card, .portfolio-item, .stat-item').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        });
+
+        // Handle window resize for responsive adjustments
+        window.addEventListener('resize', function() {
+            // Reset mobile menu if window is resized to desktop size
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                
+                // Reset dropdown displays
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.style.display = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
