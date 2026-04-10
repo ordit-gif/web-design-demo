@@ -1,2 +1,2 @@
 # Restaurants-web-design-demo
-some resturnats demo for beginer with html css and java
+Some website demos created with HTML, CSS, and Java
