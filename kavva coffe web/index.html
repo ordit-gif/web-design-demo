@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavva Bangladesh - Premium Coffee Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap">
+    <!-- Add favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-chocolate: #1A120B;
+            --medium-chocolate: #3C2A21;
+            --light-chocolate: #5C4033;
+            --gold: #D4AF37;
+            --gold-light: #FFD700;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --cream: #FAF3E0;
+            --light-cream: #F5E6CA;
+            --text-dark: #2C1810;
+            --text-light: #6D4C3D;
+            --white: #FFFFFF;
+            --black: #0F0804;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --glow: 0 0 25px rgba(212, 175, 55, 0.3);
+            --radius: 16px;
+            --glossy: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 55%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            color: var(--dark-chocolate);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--light-chocolate));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 2.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--medium-chocolate);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Glass Effect */
+        .glass-effect {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        /* Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(26, 18, 11, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-chocolate);
+            font-weight: 800;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .logo-img:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--glossy);
+            transform: rotate(30deg);
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu > li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-cream);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1.05rem;
+            padding: 0.5rem 0;
+            display: block;
+            position: relative;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover:after,
+        .nav-menu a.active:after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .cart-btn {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--gold);
+            color: var(--dark-chocolate);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 18, 11, 0.85), rgba(60, 42, 33, 0.9)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--glossy);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--light-cream);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            color: var(--white);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            color: var(--white);
+        }
+
+        /* Coffee Images Section */
+        .coffee-images {
+            padding: 8rem 0;
+            background: var(--cream);
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .coffee-image-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 300px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .coffee-image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .coffee-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .coffee-image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .coffee-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(26, 18, 11, 0.9));
+            padding: 2rem;
+            color: var(--white);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .coffee-image-card:hover .coffee-image-overlay {
+            transform: translateY(0);
+        }
+
+        /* Page Container */
+        .page-container {
+            padding-top: 100px;
+            min-height: 80vh;
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .page-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(26, 18, 11, 0.85), rgba(60, 42, 33, 0.9)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .page-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--glossy);
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-content {
+            padding: 6rem 0;
+            background: var(--cream);
+        }
+
+        /* Menu Page */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-category-btn {
+            padding: 1rem 2rem;
+            background: var(--white);
+            border: 2px solid var(--gold);
+            color: var(--dark-chocolate);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-category-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy);
+            transition: left 0.4s ease;
+        }
+
+        .menu-category-btn:hover:before {
+            left: 100%;
+        }
+
+        .menu-category-btn.active,
+        .menu-category-btn:hover {
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .menu-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--light-chocolate));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover:before {
+            transform: scaleX(1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-image {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .order-now-btn {
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .order-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            display: none;
+        }
+
+        .cart-overlay.active {
+            display: block;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .cart-header h3 {
+            margin: 0;
+            color: var(--dark-chocolate);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--light-chocolate);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--dark-chocolate);
+        }
+
+        .cart-item-price {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 1px solid var(--gold);
+            color: var(--dark-chocolate);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .cart-item-quantity {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-footer {
+            border-top: 2px solid var(--cream);
+            padding-top: 2rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark-chocolate);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-light);
+        }
+
+        .cart-empty i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Order Page */
+        .order-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--gold);
+        }
+
+        /* Checkout Page */
+        .checkout-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--gold);
+        }
+
+        /* Contact Page */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--dark-chocolate);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid rgba(92, 64, 51, 0.2);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--cream);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+            background: var(--white);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--gold);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            background: linear-gradient(135deg, var(--gold), var(--light-chocolate));
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--dark-chocolate);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--light-chocolate);
+            color: var(--white);
+        }
+
+        .map-container {
+            margin-top: 3rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery Page */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-chocolate);
+            color: var(--light-cream);
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .footer-links h3,
+        .footer-newsletter h3 {
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--light-cream);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateX(10px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cart-modal {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                max-width: 400px;
+                height: 100vh;
+                background: rgba(26, 18, 11, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 6rem 3rem 3rem;
+                transition: var(--transition);
+                z-index: 999;
+                border-left: 1px solid rgba(212, 175, 55, 0.2);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .page-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .coffee-grid,
+            .menu-items-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-form,
+            .order-form,
+            .checkout-form,
+            .menu-item-content {
+                padding: 1.5rem;
+            }
+            
+            .contact-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Active Page */
+        .page-active {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--dark-chocolate);
+            color: var(--gold);
+            padding: 1.2rem 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--gold);
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            z-index: 10000;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--light-chocolate));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container header-container">
+            <div class="logo" id="logoBtn" onclick="showPage('home-page')">
+                <img src="logo/logo.jpg" alt="Kavva bangladesh Logo" class="logo-img">
+                <div class="logo-text">Kavva Bangladesh</div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#menu" class="nav-link" data-page="menu">Menu</a></li>
+                <li><a href="#gallery" class="nav-link" data-page="gallery">Gallery</a></li>
+                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                <li>
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">৳ 0</span>
+            </div>
+            <button class="btn" id="checkoutBtn" style="width: 100%;">
+                <i class="fas fa-credit-card"></i>
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <main id="home" class="page-active">
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Experience Premium Coffee Craftsmanship</h1>
+                <p>At Kavva Bangladesh, we blend tradition with innovation to create exceptional coffee experiences. Every cup tells a story of passion, precision, and perfection.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn" id="menuBtn">
+                        <i class="fas fa-coffee"></i>
+                        Explore Our Menu
+                    </a>
+                    <a href="#" class="btn btn-outline" id="shopBtn">
+                        <i class="fas fa-store"></i>
+                        Visit Our Shop
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coffee Images Section -->
+        <section class="coffee-images">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Coffee Collection</h2>
+                    <p>Discover the art of coffee through our premium selection</p>
+                </div>
+                <div class="coffee-grid">
+                    <div class="coffee-image-card">
+                        <img src="https://images.unsplash.com/photo-1510707577719-ae7c9b788690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Espresso Coffee">
+                        <div class="coffee-image-overlay">
+                            <h3>Espresso Perfection</h3>
+                            <p>Rich and aromatic espresso shots</p>
+                        </div>
+                    </div>
+                    <div class="coffee-image-card">
+                        <img src="https://images.unsplash.com/photo-1570197788417-0f3e85d8c44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Latte Art">
+                        <div class="coffee-image-overlay">
+                            <h3>Latte Art</h3>
+                            <p>Beautifully crafted milk designs</p>
+                        </div>
+                    </div>
+                    <div class="coffee-image-card">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Iced Coffee">
+                        <div class="coffee-image-overlay">
+                            <h3>Iced Delights</h3>
+                            <p>Refreshing cold brew specialties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Page -->
+    <div id="about" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>About Us</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2>Our Coffee Journey</h2>
+                    <p>Kavva Bangladesh was founded in 2015 with a vision to revolutionize Bangladesh's coffee culture. What began as a small passion project has grown into Dhaka's premier specialty coffee destination.</p>
+                    
+                    <h3>The Kavva Philosophy</h3>
+                    <p>We believe that great coffee starts with great beans. That's why we travel the world to source the finest single-origin beans from sustainable farms in Ethiopia, Colombia, Brazil, and Indonesia.</p>
+                    
+                    <h3>Our Commitment to Quality</h3>
+                    <p>Every batch of beans is roasted in-house using our custom-built roaster to highlight unique flavor profiles. Our baristas are trained in international standards to ensure every cup meets our high expectations.</p>
+                    
+                    <h3>More Than Just Coffee</h3>
+                    <p>We've created a community space where coffee enthusiasts gather to learn, share, and enjoy exceptional brews. From coffee workshops to cultural events, we're building connections one cup at a time.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Menu Page -->
+    <div id="menu" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Our Coffee Menu</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="menu-categories">
+                    <button class="menu-category-btn active" data-category="espresso">
+                        <i class="fas fa-coffee"></i>
+                        Espresso
+                    </button>
+                    <button class="menu-category-btn" data-category="filter">
+                        <i class="fas fa-filter"></i>
+                        Filter Coffee
+                    </button>
+                    <button class="menu-category-btn" data-category="iced">
+                        <i class="fas fa-glass-whiskey"></i>
+                        Iced Coffee
+                    </button>
+                    <button class="menu-category-btn" data-category="signature">
+                        <i class="fas fa-star"></i>
+                        Signature
+                    </button>
+                    <button class="menu-category-btn" data-category="tea">
+                        <i class="fas fa-mug-hot"></i>
+                        Tea & More
+                    </button>
+                </div>
+                
+                <div class="menu-items-grid" id="menuItemsGrid">
+                    <!-- Menu items loaded here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="gallery" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Gallery</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Art">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Shop Interior">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Barista at Work">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Beans">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Shop Atmosphere">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Events">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Contact Us</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <h2>Get In Touch</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        </form>
+                        
+                        <div class="social-links" style="margin-top: 2rem;">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3>Our Location</h3>
+                                <p>Gulshan 1, Dhaka 1212<br>Bangladesh</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3>Phone Number</h3>
+                                <p>+880 1711-223344<br>+880 1811-556677</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3>Email Address</h3>
+                                <p>info@kavvabangladesh.com<br>orders@kavvabangladesh.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3>Opening Hours</h3>
+                                <p>Monday - Friday: 7:00 AM - 11:00 PM<br>Saturday - Sunday: 8:00 AM - 12:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.837240932882!2d90.40665931543164!3d23.79086829290063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x97856381e88fb311!2sGulshan%201%2C%20Dhaka%201212%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1658761234567!5m2!1sen!2s" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Shop Page -->
+    <div id="shop" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Visit Our Shop</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="map-container" style="height: 400px; margin-bottom: 3rem;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.837240932882!2d90.40665931543164!3d23.79086829290063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x97856381e88fb311!2sGulshan%201%2C%20Dhaka%201212%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1658761234567!5m2!1sen!2s" allowfullscreen loading="lazy"></iframe>
+                </div>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2>Our Coffee Shop</h2>
+                    <p>Visit our flagship store in Gulshan, Dhaka to experience the perfect blend of premium coffee and cozy ambiance.</p>
+                    
+                    <h3 style="margin-top: 2rem;">Shop Features</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 2rem;">
+                        <li>Premium coffee beans sourced from around the world</li>
+                        <li>Expert baristas trained in international standards</li>
+                        <li>Cozy seating arrangements for work and relaxation</li>
+                        <li>Free high-speed WiFi</li>
+                        <li>Power outlets at every table</li>
+                        <li>Local art exhibitions</li>
+                        <li>Outdoor seating area</li>
+                    </ul>
+                    
+                    <h3>Location Details</h3>
+                    <div style="background: var(--white); padding: 2rem; border-radius: var(--radius); margin-top: 1rem; box-shadow: var(--shadow);">
+                        <p><strong>Address:</strong> Plot 15, Road 27, Gulshan 1, Dhaka 1212, Bangladesh</p>
+                        <p><strong>Phone:</strong> +880 1711-223344</p>
+                        <p><strong>Email:</strong> shop@kavvabangladesh.com</p>
+                        <p><strong>Hours:</strong> Monday-Friday: 7AM-11PM | Saturday-Sunday: 8AM-12AM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Order Page -->
+    <div id="order" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Order Now</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="order-form">
+                    <h2>Place Your Order</h2>
+                    <p style="margin-bottom: 2rem;">Fill out the form below and we'll prepare your order.</p>
+                    
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="orderName">Full Name</label>
+                            <input type="text" id="orderName" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderPhone">Phone Number</label>
+                            <input type="tel" id="orderPhone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderEmail">Email Address</label>
+                            <input type="email" id="orderEmail" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderType">Order Type</label>
+                            <select id="orderType" class="form-control" required>
+                                <option value="">Select order type</option>
+                                <option value="pickup">Pickup</option>
+                                <option value="delivery">Delivery</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderAddress">Delivery Address (if delivery)</label>
+                            <textarea id="orderAddress" class="form-control" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderItems">Order Items</label>
+                            <textarea id="orderItems" class="form-control" rows="4" placeholder="Please list the items you want to order..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderTime">Preferred Time</label>
+                            <input type="text" id="orderTime" class="form-control" placeholder="e.g., ASAP or specific time">
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkout" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Checkout</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div class="checkout-form">
+                    <h2>Complete Your Order</h2>
+                    
+                    <div style="background: var(--cream); padding: 2rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                        <h3>Order Summary</h3>
+                        <div id="checkoutSummary">
+                            <!-- Order summary will be loaded here -->
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--gold);">
+                            <span>Total Amount:</span>
+                            <span id="checkoutTotal">৳ 0</span>
+                        </div>
+                    </div>
+                    
+                    <h3>Payment Information</h3>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label for="paymentMethod">Payment Method</label>
+                            <select id="paymentMethod" class="form-control" required>
+                                <option value="">Select payment method</option>
+                                <option value="cash">Cash on Delivery</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="mobile">Mobile Banking</option>
+                            </select>
+                        </div>
+                        
+                        <div id="cardDetails" style="display: none;">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label for="cardExpiry">Expiry Date</label>
+                                    <input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardCVC">CVC</label>
+                                    <input type="text" id="cardCVC" class="form-control" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="mobilePayment" style="display: none;">
+                            <div class="form-group">
+                                <label for="mobileNumber">Mobile Number</label>
+                                <input type="text" id="mobileNumber" class="form-control" placeholder="01XXXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="transactionId">Transaction ID</label>
+                                <input type="text" id="transactionId" class="form-control" placeholder="Enter transaction ID">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="specialInstructions">Special Instructions</label>
+                            <textarea id="specialInstructions" class="form-control" rows="3" placeholder="Any special instructions for your order..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">
+                            <i class="fas fa-check-circle"></i>
+                            Confirm Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Additional Pages for Footer Links -->
+    <div id="events" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Events & Workshops</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2>Coffee Events & Workshops</h2>
+                    <p>Join us for exciting events and learn the art of coffee making.</p>
+                    
+                    <div class="menu-items-grid" style="margin-top: 3rem;">
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Workshop" class="menu-item-image">
+                            <div class="menu-item-content">
+                                <h3>Latte Art Workshop</h3>
+                                <p>Learn the techniques of creating beautiful latte art designs from our expert baristas.</p>
+                                <p><strong>Date:</strong> Every Saturday</p>
+                                <p><strong>Time:</strong> 3:00 PM - 5:00 PM</p>
+                                <p><strong>Price:</strong> ৳ 1,500</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coffee Tasting" class="menu-item-image">
+                            <div class="menu-item-content">
+                                <h3>Coffee Tasting Session</h3>
+                                <p>Experience different coffee varieties and learn to identify flavor profiles.</p>
+                                <p><strong>Date:</strong> First Sunday of every month</p>
+                                <p><strong>Time:</strong> 4:00 PM - 6:00 PM</p>
+                                <p><strong>Price:</strong> ৳ 1,200</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="wholesale" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Wholesale Orders</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2>Wholesale Coffee Beans</h2>
+                    <p>We supply premium coffee beans to restaurants, cafes, and businesses across Bangladesh.</p>
+                    
+                    <div style="background: var(--white); padding: 2rem; border-radius: var(--radius); margin: 2rem 0; box-shadow: var(--shadow);">
+                        <h3>Our Wholesale Products</h3>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-top: 1rem;">
+                            <li>Premium Arabica Beans (Ethiopian Yirgacheffe)</li>
+                            <li>Specialty Robusta Beans (Indian Monsooned Malabar)</li>
+                            <li>Signature Blend (House Roast)</li>
+                            <li>Single Origin Coffee Packets</li>
+                            <li>Ground Coffee (Various Grind Sizes)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="careers" class="page-container">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Careers</h1>
+            </div>
+        </section>
+        
+        <section class="page-content">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2>Join Our Team</h2>
+                    <p>We're always looking for passionate individuals to join the Kavva Bangladesh family.</p>
+                    
+                    <div style="margin-top: 3rem;">
+                        <div class="menu-item" style="margin-bottom: 2rem;">
+                            <div class="menu-item-content">
+                                <h3>Barista</h3>
+                                <p>We're looking for passionate baristas who love coffee and creating great customer experiences.</p>
+                                <p><strong>Requirements:</strong></p>
+                                <ul style="margin-left: 1.5rem; color: var(--text-light);">
+                                    <li>1+ years of barista experience</li>
+                                    <li>Knowledge of coffee preparation techniques</li>
+                                    <li>Excellent customer service skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div id="toastMessage">Message sent successfully!</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo" id="footerLogoBtn">
+                        <div class="logo-img">K</div>
+                        <div class="logo-text">Kavva Bangladesh</div>
+                    </div>
+                    <p>Crafting exceptional coffee experiences since 2015. We're passionate about bringing the world's finest beans to Bangladesh.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="footer-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="footer-link" data-page="about">About Us</a></li>
+                        <li><a href="#" class="footer-link" data-page="menu">Our Menu</a></li>
+                        <li><a href="#" class="footer-link" data-page="gallery">Gallery</a></li>
+                        <li><a href="#" class="footer-link" data-page="contact">Contact</a></li>
+                        <li><a href="#" class="footer-link" data-page="shop">Visit Shop</a></li>
+                        <li><a href="#" class="footer-link" data-page="order">Order Now</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Other Pages</h3>
+                    <ul>
+                        <li><a href="#" class="footer-link" data-page="events">Events & Workshops</a></li>
+                        <li><a href="#" class="footer-link" data-page="wholesale">Wholesale Orders</a></li>
+                        <li><a href="#" class="footer-link" data-page="careers">Careers</a></li>
+                        <li><a href="#" class="footer-link" data-page="checkout">Checkout</a></li>
+                        <li><a href="#" style="color: var(--gold);">Privacy Policy</a></li>
+                        <li><a href="#" style="color: var(--gold);">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Kavva Bangladesh. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--gold);"></i> for coffee lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart System
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentOrder = {};
+        
+        // Update cart count
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+        
+        // Update cart modal
+        function updateCartModal() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartTotal.textContent = '৳ 0';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">৳ ${item.price} x ${item.quantity}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                            <span class="cart-item-quantity">${item.quantity}</span>
+                            <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                            <button class="remove-item" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            cartTotal.textContent = `৳ ${total}`;
+            
+            // Add event listeners
+            document.querySelectorAll('.decrease-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity--;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    saveCart();
+                    updateCartModal();
+                    updateCartCount();
+                });
+            });
+            
+            document.querySelectorAll('.increase-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart[index].quantity++;
+                    saveCart();
+                    updateCartModal();
+                    updateCartCount();
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    saveCart();
+                    updateCartModal();
+                    updateCartCount();
+                    showToast('Item removed from cart');
+                });
+            });
+        }
+        
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        // Add to cart
+        function addToCart(itemName, itemPrice) {
+            // Parse price
+            const price = parseInt(itemPrice.replace('৳ ', '').trim());
+            
+            // Check if item already in cart
+            const existingItem = cart.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: itemName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartCount();
+            updateCartModal();
+            showToast(`${itemName} added to cart!`);
+        }
+        
+        // Cart modal controls
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCart = document.getElementById('closeCart');
+        const cartModal = document.getElementById('cartModal');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        cartBtn.addEventListener('click', () => {
+            cartModal.classList.add('active');
+            cartOverlay.classList.add('active');
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        });
+        
+        cartOverlay.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        });
+        
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showToast('Your cart is empty');
+                return;
+            }
+            
+            // Save current cart to order
+            currentOrder = {
+                items: [...cart],
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                date: new Date().toLocaleString()
+            };
+            
+            // Go to checkout page
+            showPage('checkout');
+            updateCheckoutSummary();
+            
+            // Close cart modal
+            cartModal.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Page Navigation System
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-container, main').forEach(page => {
+                page.classList.remove('page-active');
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('page-active');
+                targetPage.style.display = 'block';
+                
+                // Update URL without refreshing
+                window.history.pushState({page: pageId}, '', `#${pageId}`);
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                // Close cart modal
+                cartModal.classList.remove('active');
+                cartOverlay.classList.remove('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Load content if needed
+                if (pageId === 'menu') {
+                    loadMenuItems('espresso');
+                }
+            }
+        }
+        
+        // Navigation Click Handlers
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+        
+        // FIX 1: Home page buttons click handlers
+        document.getElementById('menuBtn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('menu');
+        });
+        
+        document.getElementById('shopBtn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('shop');
+        });
+        
+        // FIX 2: Logo click handler (both header and footer logos)
+        document.getElementById('logoBtn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('home');
+        });
+        
+        document.getElementById('footerLogoBtn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('home');
+        });
+        
+        // FIX 3: Make all footer links clickable
+        document.querySelectorAll('.footer-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                }
+            });
+        });
+        
+        // Menu Data
+        const menuData = {
+            espresso: [
+                { 
+                    name: "Espresso", 
+                    price: "৳ 220", 
+                    desc: "Rich and concentrated coffee shot",
+                    image: "https://images.unsplash.com/photo-1510707577719-ae7c9b788690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Double Espresso", 
+                    price: "৳ 300", 
+                    desc: "Two shots of our premium espresso",
+                    image: "https://images.unsplash.com/photo-1510707577719-ae7c9b788690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Americano", 
+                    price: "৳ 240", 
+                    desc: "Espresso with hot water",
+                    image: "https://images.unsplash.com/photo-1510707577719-ae7c9b788690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Cappuccino", 
+                    price: "৳ 280", 
+                    desc: "Espresso with steamed milk foam",
+                    image: "https://images.unsplash.com/photo-1570197788417-0f3e85d8c44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Latte", 
+                    price: "৳ 300", 
+                    desc: "Espresso with velvety steamed milk",
+                    image: "https://images.unsplash.com/photo-1570197788417-0f3e85d8c44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            filter: [
+                { 
+                    name: "Pour Over", 
+                    price: "৳ 250", 
+                    desc: "Hand-brewed single origin",
+                    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "French Press", 
+                    price: "৳ 240", 
+                    desc: "Full-bodied immersion brew",
+                    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Aeropress", 
+                    price: "৳ 260", 
+                    desc: "Smooth and clean coffee",
+                    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Chemex", 
+                    price: "৳ 270", 
+                    desc: "Clean and bright filter coffee",
+                    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            iced: [
+                { 
+                    name: "Iced Americano", 
+                    price: "৳ 260", 
+                    desc: "Chilled espresso with water",
+                    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Iced Latte", 
+                    price: "৳ 320", 
+                    desc: "Espresso with cold milk",
+                    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Cold Brew", 
+                    price: "৳ 280", 
+                    desc: "18-hour steeped coffee",
+                    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Iced Mocha", 
+                    price: "৳ 340", 
+                    desc: "Iced chocolate coffee",
+                    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            signature: [
+                { 
+                    name: "Kavva Signature", 
+                    price: "৳ 380", 
+                    desc: "Our house specialty blend",
+                    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Golden Latte", 
+                    price: "৳ 350", 
+                    desc: "Turmeric and spice latte",
+                    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Rose Cardamom Latte", 
+                    price: "৳ 340", 
+                    desc: "Floral and spicy latte",
+                    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Matcha Espresso Fusion", 
+                    price: "৳ 390", 
+                    desc: "Green tea meets coffee",
+                    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            tea: [
+                { 
+                    name: "English Breakfast", 
+                    price: "৳ 200", 
+                    desc: "Classic black tea",
+                    image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Green Tea", 
+                    price: "৳ 190", 
+                    desc: "Fresh green tea leaves",
+                    image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Masala Chai", 
+                    price: "৳ 220", 
+                    desc: "Traditional spiced tea",
+                    image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                { 
+                    name: "Matcha Latte", 
+                    price: "৳ 280", 
+                    desc: "Japanese green tea latte",
+                    image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ]
+        };
+        
+        // Load Menu Items
+        function loadMenuItems(category) {
+            const menuGrid = document.getElementById('menuItemsGrid');
+            if (!menuGrid) return;
+            
+            menuGrid.innerHTML = '';
+            const items = menuData[category] || [];
+            
+            items.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="menu-item-image">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <div>
+                                <h3>${item.name}</h3>
+                                <p>${item.desc}</p>
+                            </div>
+                            <div class="menu-item-price">${item.price}</div>
+                        </div>
+                        <button class="order-now-btn add-to-cart-btn" data-name="${item.name}" data-price="${item.price}">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                menuGrid.appendChild(menuItem);
+            });
+            
+            // Add event listeners
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemName = this.getAttribute('data-name');
+                    const itemPrice = this.getAttribute('data-price');
+                    addToCart(itemName, itemPrice);
+                });
+            });
+        }
+        
+        // Update checkout summary
+        function updateCheckoutSummary() {
+            const checkoutSummary = document.getElementById('checkoutSummary');
+            const checkoutTotal = document.getElementById('checkoutTotal');
+            
+            if (!currentOrder.items || currentOrder.items.length === 0) {
+                checkoutSummary.innerHTML = '<p>No items in order</p>';
+                checkoutTotal.textContent = '৳ 0';
+                return;
+            }
+            
+            let html = '';
+            currentOrder.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>৳ ${itemTotal}</span>
+                    </div>
+                `;
+            });
+            
+            checkoutSummary.innerHTML = html;
+            checkoutTotal.textContent = `৳ ${currentOrder.total}`;
+        }
+        
+        // Menu Category Switching
+        document.querySelectorAll('.menu-category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.menu-category-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Load items for category
+                const category = this.getAttribute('data-category');
+                loadMenuItems(category);
+            });
+        });
+        
+        // Payment method toggle
+        const paymentMethod = document.getElementById('paymentMethod');
+        const cardDetails = document.getElementById('cardDetails');
+        const mobilePayment = document.getElementById('mobilePayment');
+        
+        paymentMethod.addEventListener('change', function() {
+            if (this.value === 'card') {
+                cardDetails.style.display = 'block';
+                mobilePayment.style.display = 'none';
+            } else if (this.value === 'mobile') {
+                cardDetails.style.display = 'none';
+                mobilePayment.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'none';
+                mobilePayment.style.display = 'none';
+            }
+        });
+        
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize cart
+            updateCartCount();
+            updateCartModal();
+            
+            // Check URL hash
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showPage(hash);
+            }
+            
+            // Load initial menu
+            loadMenuItems('espresso');
+            
+            // Form submissions
+            document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showToast('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+            
+            // Order form submission
+            document.getElementById('orderForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showToast('Order placed successfully! Please proceed to checkout.');
+                showPage('checkout');
+                
+                // Create order from form
+                const orderItems = document.getElementById('orderItems').value;
+                currentOrder = {
+                    items: [{ name: "Custom Order", price: 0, quantity: 1, details: orderItems }],
+                    total: 0, // Will be calculated
+                    date: new Date().toLocaleString()
+                };
+                
+                updateCheckoutSummary();
+            });
+            
+            // Checkout form submission
+            document.getElementById('checkoutForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Clear cart
+                cart = [];
+                saveCart();
+                updateCartCount();
+                updateCartModal();
+                
+                showToast('Order confirmed! Thank you for your purchase. We will contact you shortly.');
+                showPage('home');
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                const scrollProgress = document.getElementById('scrollProgress');
+                
+                // Header background
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(26, 18, 11, 0.98)';
+                    header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.background = 'rgba(26, 18, 11, 0.95)';
+                    header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+                }
+                
+                // Scroll progress
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                scrollProgress.style.width = scrolled + "%";
+            });
+            
+            // Social links click
+            document.querySelectorAll('.social-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showToast('Thank you for connecting with us on social media!');
+                });
+            });
+        });
+        
+        // Handle browser back/forward
+        window.addEventListener('popstate', function(event) {
+            if (event.state?.page) {
+                showPage(event.state.page);
+            }
+        });
+    </script>
+</body>
+</html>
